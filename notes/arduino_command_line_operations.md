@@ -1,3 +1,5 @@
+## OS
+Fedora Workstation 44
 ## Arduino installation
 curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
 
@@ -8,6 +10,8 @@ sudo mv bin/arduino-cli /usr/local/bin/
 - sudo arduino-cli core install arduino:avr
 - sudo arduino-cli lib install "HID-Project"
 
+### Port identification
+ls /dev/tty*
 ### Sketch compilation
 sudo arduino-cli compile --fqbn arduino:avr:micro ~/Documents/case_project_driver/case_project/
 ### Sketch upload
