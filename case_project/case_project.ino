@@ -26,8 +26,8 @@ void setup() {
 	Consumer.begin();
 
 	pinMode(PIN_FAN_CONTROL, OUTPUT);
-	pinMode(PIN_VOLUME_CLK, INPUT);
-	pinMode(PIN_VOLUME_DT, INPUT);
+	pinMode(PIN_VOLUME_CLK, INPUT_PULLUP);
+	pinMode(PIN_VOLUME_DT, INPUT_PULLUP);
 	pinMode(PIN_FAN_BUTTON, INPUT_PULLUP);
 	pinMode(PIN_MUTE_BUTTON, INPUT_PULLUP);
 
