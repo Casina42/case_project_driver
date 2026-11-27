@@ -13,7 +13,7 @@ MODULE_DESCRIPTION("Invia utilizzo CPU (64-bit) ad Arduino");
 MODULE_VERSION("0.2");
 
 // Percorso della porta seriale di Arduino (controlla con 'ls /dev/tty*')
-#define ARDUINO_PORT "/dev/ttyACM0"
+#define ARDUINO_PORT "/dev/arduino_cpu"	//note: see 'notes/device_recognition.md'
 
 static struct delayed_work cpu_work;
 static struct file *arduino_filp = NULL;
