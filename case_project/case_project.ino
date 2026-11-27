@@ -38,10 +38,10 @@ void setup() {
 
 void loop() {
 	// RICEZIONE PACCHETTO A 64 BIT DAL DRIVER LINUX
-	if (Serial.available() >= 8) {
-		// Legge esattamente 8 byte (64 bit) inviati dal modulo kernel
-		Serial.readBytes((char*)&cpu_usage, 8);
-	}
+	//if (Serial.available() >= 8) {
+	//	// Legge esattamente 8 byte (64 bit) inviati dal modulo kernel
+	//	Serial.readBytes((char*)&cpu_usage, 8);
+	//}
 
 	int bottone_ventole = digitalRead(PIN_FAN_BUTTON);
 	int volumeClk = digitalRead(PIN_VOLUME_CLK);
@@ -50,30 +50,34 @@ void loop() {
 
 	// Gestione Encoder Volume
 	if (volumeClk != prev_volumeClk && volumeClk == HIGH) {
-	if (volumeDt == volumeClk) {
-		Consumer.write(MEDIA_VOLUME_DOWN);
-	} else {
-		Consumer.write(MEDIA_VOLUME_UP);
-	}
-	stato_muto = LOW;
+		if (volumeDt == volumeClk) {
+			Consumer.write(MEDIA_VOLUME_DOWN);
+			Serial.print("abbassa");
+		} else {
+			Consumer.write(MEDIA_VOLUME_UP);
+			Serial.print("alza");
+		}
+		stato_muto = LOW;
 	}
 	
 	// Gestione Pulsante Mute
 	if (bottone_mute == LOW && prevMuteButton == HIGH) {
-	stato_muto = !stato_muto;
-	Consumer.write(MEDIA_VOLUME_MUTE);
-	delay(20);
+		stato_muto = !stato_muto;
+		Consumer.write(MEDIA_VOLUME_MUTE);
+		delay(20);
 	}
 
 	// Gestione Pulsante Ventole (override manuale)
 	if (bottone_ventole == LOW && prevFanButton == HIGH) {
-	stato_ventole = !stato_ventole;
-	digitalWrite(PIN_FAN_CONTROL, stato_ventole);
-	delay(20);
+		stato_ventole = !stato_ventole;
+		digitalWrite(PIN_FAN_CONTROL, stato_ventole);
+		delay(20);
 	}
 	
 	prev_volumeClk = volumeClk;
 	prev_volumeDt = volumeDt;
 	prevMuteButton = bottone_mute;
 	prevFanButton = bottone_ventole;
+
+	Serial.print("\n");
 }
